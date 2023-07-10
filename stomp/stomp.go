@@ -242,11 +242,10 @@ func (c *Client) Send(destination, contentType string, body []byte, opts *SendOp
 		opts = new(SendOptions)
 	}
 	var sendOpts []func(*frame.Frame) error
-	  sendOpts = append(sendOpts, stomp.SendOpt.NoContentLength)
+	 
 	if opts.Receipt {
 		sendOpts = append(sendOpts, stomp.SendOpt.Receipt)
 	}
-	
 
 	for k, v := range opts.Headers {
 		sendOpts = append(sendOpts, stomp.SendOpt.Header(k, v))
