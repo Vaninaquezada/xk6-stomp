@@ -242,7 +242,7 @@ func (c *Client) Send(destination, contentType string, body []byte, opts *SendOp
 		opts = new(SendOptions)
 	}
 	var sendOpts []func(*frame.Frame) error
-	  //  sendOpts = append(sendOpts, stomp.SendOpt.NoContentLength)
+	  sendOpts = append(sendOpts, stomp.SendOpt.NoContentLength)
 	if opts.Receipt {
 		sendOpts = append(sendOpts, stomp.SendOpt.Receipt)
 	}
@@ -251,8 +251,6 @@ func (c *Client) Send(destination, contentType string, body []byte, opts *SendOp
 	for k, v := range opts.Headers {
 		sendOpts = append(sendOpts, stomp.SendOpt.Header(k, v))
 	}
-	//stomp.SendOpt.Header.Del(frame.ContentLength)
-	sendOpts = append(sendOpts, stomp.SendOpt.Header.Del(frame.ContentLength))
 
 	err = c.conn.Send(destination, contentType, body, sendOpts...)
 	if err != nil {
