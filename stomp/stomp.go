@@ -250,7 +250,7 @@ func (c *Client) Send(destination, contentType string, body []byte, opts *SendOp
 	for k, v := range opts.Headers {
 		sendOpts = append(sendOpts, stomp.SendOpt.Header(k, v))
 	}
-	sendOpts = append(sendOpts, stomp.SendOpt.NoContentLength)
+	
 	err = c.conn.Send(destination, contentType, body, sendOpts...)
 	if err != nil {
 		common.Throw(c.vu.Runtime(), err)
