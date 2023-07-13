@@ -249,6 +249,7 @@ func (c *Client) Send(destination, contentType string, body []byte, opts *SendOp
 	}
 	if opts.NoContentLength {
 		sendOpts = append(sendOpts, stomp.SendOpt.NoContentLength)
+		log.Println("NoContentLength true", opts.NoContentLength)
 	}
 
 	for k, v := range opts.Headers {
